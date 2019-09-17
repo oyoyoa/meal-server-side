@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
-from randomMeal.models import FoodConfigParam, User
-from randomMeal.serializers import FoodConfigParamSerializer
-from randomMeal.serializers import AuthSerializer
+from main.models import FoodConfigParam, User
+from main.serializers import FoodConfigParamSerializer
+from main.serializers import AuthSerializer
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
