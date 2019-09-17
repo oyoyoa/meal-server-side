@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from randomMeal.models import FoodConfigParam
-from randomMeal.models import User
+from main.models import FoodConfigParam
+from main.models import User
 
 
 class AuthSerializer(serializers.Serializer):
