@@ -4,6 +4,14 @@ python: 3.6^
 django: 2.2.5
 djangorestframework: 3.10.3
 
+# 準備
+
+python manage.py migrate
+
+# 実行
+
+python manage.py runserver
+
 ## 使い方
 
 ### ユーザーの作成
