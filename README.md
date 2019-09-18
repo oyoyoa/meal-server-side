@@ -1,6 +1,8 @@
-## 練習課題A/ユーザ認証あり
-  肉・魚・野菜（でる100per・でない0per）を登録できる
-  「でる」が選ばれている中からどれか一つを返す
+# 環境
+
+python: 3.6^
+django: 2.2.5
+djangorestframework: 3.10.3
 
 ## 使い方
 
@@ -11,9 +13,12 @@ curl http://localhost:8000/signup/ -d "uuid=yourname"
 curl http://localhost:8000/signin/ -d "uuid=yourname"
 
 ### 食材の追加
-curl -X POST -H 'Content-Type:application/json' -d '{"name":"肉", "percent":100}' http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
+curl -X POST -H 'Content-Type:application/json' -d '{"name":"豚肉", "food_type": "meat", "percent":100}' http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
 
-curl -X POST -H 'Content-Type:application/json' -d '{"name":"野菜", "percent":0}' http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
+curl -X POST -H 'Content-Type:application/json' -d '{"name":"白菜", "food_type": "vegetable", "percent":0}' http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
+
+### 食材の一括追加
+curl -X POST -H 'Content-Type:application/json' -d '[{"name":"鶏肉", "food_type": "meat", "percent":100}, {"name":"牛肉", "food_type": "meat", "percent":100}]' http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
 
 ### 選ばれている中からランダムに選出
 curl http://localhost:8000/randomMeal/ -H 'Authorization: JWT '
@@ -25,5 +30,5 @@ curl http://localhost:8000/randomMeal/config/ -H 'Authorization: JWT '
 curl -X PUT -H 'Content-Type:application/json' -d '{"percent":0}' http://localhost:8000/randomMeal/config/1/ -H 'Authorization: JWT '
 
 ### 食材の削除
-curl -X DELETE http://localhost:8000/randomMeal/config/3/ -H 'Authorization: JWT '
+curl -X DELETE http://localhost:8000/randomMeal/config/9/ -H 'Authorization: JWT '
 

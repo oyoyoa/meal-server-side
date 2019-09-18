@@ -12,7 +12,8 @@ class AuthSerializer(serializers.Serializer):
 
 class FoodConfigParamSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=100, required=False)
+    food_type = serializers.CharField(max_length=100, required=False)
     user = AuthSerializer(required=False)
     class Meta:
         model = FoodConfigParam
-        fields = ('id', 'name', 'percent', 'user')
+        fields = ('id', 'name', 'food_type', 'percent', 'user')
