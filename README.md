@@ -1,9 +1,9 @@
 # 環境
 
-python: 3.6^
-django: 2.2.5
-djangorestframework: 3.10.3
-djangorestframework-jwt: 1.11.0
+python: 3.6^  
+django: 2.2.5  
+djangorestframework: 3.10.3  
+djangorestframework-jwt: 1.11.0  
 
 # 準備
 
