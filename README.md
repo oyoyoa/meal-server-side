@@ -6,12 +6,12 @@ djangorestframework: 3.10.3
 djangorestframework-jwt: 1.11.0  
 
 # 準備
-
-python manage.py migrate
+pipenv install
+pipenv run python manage.py migrate
 
 # 実行
 
-python manage.py runserver
+pipenv run python manage.py runserver
 
 ## 使い方
 
