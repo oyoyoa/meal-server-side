@@ -12,7 +12,7 @@ class RandomMeal(APIView):
         serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
         foods = []
         for i in range(len(serializer.data)):
-            if serializer.data[i]['percent'] == 0:
+            if serializer.data[i]['rate'] == 0:
                 continue
             foods.append(serializer.data[i]['name'])
         food = random.choice(foods)
