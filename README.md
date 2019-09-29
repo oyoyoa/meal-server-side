@@ -7,6 +7,7 @@ djangorestframework-jwt: 1.11.0
 
 # 準備
 pipenv install
+
 pipenv run python manage.py migrate
 
 # 実行
