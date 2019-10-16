@@ -6,7 +6,7 @@ from rest_framework.response import Response
 import random
 
 
-class RandomMeal(APIView):
+class RandomFood(APIView):
     def get(self, request, format=None):
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
         serializer = FoodConfigParamSerializer(foodConfigParams, many=True)

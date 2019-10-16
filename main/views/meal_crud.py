@@ -4,7 +4,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-class RandomMealConfigList(ListCreateAPIView):
+class RandomFoodConfigList(ListCreateAPIView):
     queryset = FoodConfigParam.objects.all()
     serializer_class = FoodConfigParamSerializer
     def create(self, request, *args, **kwargs):
@@ -30,7 +30,7 @@ class RandomMealConfigList(ListCreateAPIView):
         return Response(serializer.errors)
 
 
-class RandomMealConfigDetail(GenericAPIView):
+class UserFoodConfig(GenericAPIView):
     serializer_class = FoodConfigParamSerializer
 
     def get(self, request):

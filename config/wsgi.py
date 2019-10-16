@@ -1,5 +1,5 @@
 """
-WSGI config for randomMeal project.
+WSGI config for randomFood project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
