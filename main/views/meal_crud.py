@@ -31,6 +31,7 @@ class RandomFoodConfigList(ListCreateAPIView):
 
 
 class UserFoodConfig(GenericAPIView):
+    queryset = FoodConfigParam.objects.all()
     serializer_class = FoodConfigParamSerializer
 
     def get(self, request):
@@ -39,10 +40,13 @@ class UserFoodConfig(GenericAPIView):
         return Response(serializer.data)
 
     def put(self, request):
-        foodname = request.data['foodname']
-        new_rate = request.data['new_rate']
-        foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=foodname)
-        serializer = FoodConfigParamSerializer(foodConfigParam, data={'rate': new_rate}, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        res = []
+        for config in request.data:
+            foodname = config['foodname']
+            new_rate = config['new_rate']
+            foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=foodname)
+            serializer = FoodConfigParamSerializer(foodConfigParam, data={'rate': new_rate}, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            res.append(serializer.data)
+        return Response(res)
