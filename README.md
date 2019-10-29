@@ -40,10 +40,10 @@ curl http://localhost:8000/randomFood/config/ -H 'Authorization: JWT '
 curl http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
 
 ### 食材の選択状態の変更
-curl -X PUT -H 'Content-Type:application/json' -d '[{"foodname": "鶏肉", "new_rate": 30}]' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
+curl -X PUT -H 'Content-Type:application/json' -d '[{"name": "鶏肉", "rate": 30}]' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
 
 ### 食材の選択状態の一括変更
-curl -X PUT -H 'Content-Type:application/json' -d '[{"foodname":"鶏肉", "new_rate":0}, {"foodname":"牛肉", "new_rate":0}]' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
+curl -X PUT -H 'Content-Type:application/json' -d '[{"name":"鶏肉", "rate":0}, {"name":"牛肉", "rate":0}]' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
 
 
 ### 食材の削除
