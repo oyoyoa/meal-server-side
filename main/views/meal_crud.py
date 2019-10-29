@@ -42,10 +42,10 @@ class UserFoodConfig(GenericAPIView):
     def put(self, request):
         res = []
         for config in request.data:
-            foodname = config['foodname']
-            new_rate = config['new_rate']
-            foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=foodname)
-            serializer = FoodConfigParamSerializer(foodConfigParam, data={'rate': new_rate}, partial=True)
+            name = config['name']
+            rate = config['rate']
+            foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=name)
+            serializer = FoodConfigParamSerializer(foodConfigParam, data={'rate': rate}, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             res.append(serializer.data)
