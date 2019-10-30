@@ -1,6 +1,6 @@
 from main.models import FoodConfigParam
 from main.serializers import FoodConfigParamSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView
+from rest_framework.generics import ListCreateAPIView, GenericAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -31,6 +31,7 @@ class RandomFoodConfigList(ListCreateAPIView):
 
 
 class UserFoodConfig(GenericAPIView):
+    queryset = FoodConfigParam.objects.all()
     serializer_class = FoodConfigParamSerializer
 
     def get(self, request):
@@ -38,11 +39,14 @@ class UserFoodConfig(GenericAPIView):
         serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
         return Response(serializer.data)
 
-    # 以下まだ
     def put(self, request):
-        foodname = serializers.CharField(min_length=10)
-        new_rate = models.IntegerField()
-
-        foodConfigParams = FoodConfigParam.objects.filter(user=request.user, name=foodname)
-        serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
-        return Response(serializer.data)
+        res = []
+        for config in request.data:
+            name = config['name']
+            rate = config['rate']
+            foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=name)
+            serializer = FoodConfigParamSerializer(foodConfigParam, data={'rate': rate}, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            res.append(serializer.data)
+        return Response(res)
