@@ -1,4 +1,4 @@
-from main.models import User
+from main.models import User, FoodConfigParam
 from main.serializers import AuthSerializer
 from rest_framework.generics import GenericAPIView
 from rest_framework.exceptions import AuthenticationFailed
@@ -36,10 +36,12 @@ class RegisterAuthView(GenericAPIView):
 
         user = User.objects.create_user(uuid=serializer.data['uuid'])
         user.save()
-        
         if not user:
             raise AuthenticationFailed()
         payload = jwt_payload_handler(user)
+        user = User.objects.filter(uuid=serializer.data['uuid']).last()
+        food = FoodConfigParam()
+        food.create_defaultfood(user=user)
         return Response({
             'token': jwt_encode_handler(payload),
         })
