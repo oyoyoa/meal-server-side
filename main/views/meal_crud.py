@@ -38,7 +38,7 @@ class UserFoodConfig(GenericAPIView):
         food_type = ['meat', 'meat', 'meat', 'fish', 'fish', 'vegetable', 'vegetable', 'vegetable', 'vegetable', 'vegetable']
         foods = []
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
-        for num in len(food_name):
+        for num in range(10):
             if foodConfigParams.first() is not None:
                 serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
                 return Response({'data': serializer.data})
