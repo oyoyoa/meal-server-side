@@ -46,4 +46,4 @@ class RandomFood(APIView):
             if randomNum < count:
                 resultMeal.append(main['name'])
                 break
-        return Response(resultMeal)
+        return Response({'data': resultMeal})

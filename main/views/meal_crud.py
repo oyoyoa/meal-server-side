@@ -19,13 +19,13 @@ class RandomFoodConfigList(ListCreateAPIView):
             for serializer in serializers:
                 serializer.save(user=request.user)
             serializer = self.get_serializer(self.queryset.filter(user=request.user), many=True)
-            return Response(serializer.data)
+            return Response({'data': serializer.data})
 
         else:
             serializer = self.get_serializer(data=request.data)
             if serializer.is_valid():
                 serializer.save(user=request.user)
-                return Response(serializer.data)
+                return Response({'data': serializer.data})
 
         return Response(serializer.errors)
 
@@ -38,21 +38,21 @@ class UserFoodConfig(GenericAPIView):
         food_type = ['meat', 'meat', 'meat', 'fish', 'fish', 'vegetable', 'vegetable', 'vegetable', 'vegetable', 'vegetable']
         foods = []
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
-        for num in range(10):
+        for num in len(food_name):
             if foodConfigParams.first() is not None:
                 serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
-                return Response(serializer.data)
+                return Response({'data': serializer.data})
 
             food = FoodConfigParam.objects.create(name=food_name[num], food_type=food_type[num], rate=100, user=request.user)
             food.save()
             serializer = FoodConfigParamSerializer(food)
             foods.append(serializer.data)
-        return Response(foods)
+        return Response({'data': foods})
 
     def get(self, request):
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
         serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
-        return Response(serializer.data)
+        return Response({'data': serializer.data})
 
     def put(self, request):
         res = []
@@ -64,4 +64,4 @@ class UserFoodConfig(GenericAPIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             res.append(serializer.data)
-        return Response(res)
+        return Response({'data': res})
