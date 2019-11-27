@@ -38,11 +38,10 @@ class UserFoodConfig(GenericAPIView):
         food_type = ['meat', 'meat', 'meat', 'fish', 'fish', 'vegetable', 'vegetable', 'vegetable', 'vegetable', 'vegetable']
         foods = []
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
-        for num in range(10):
-            if foodConfigParams.first() is not None:
+        if foodConfigParams.first() is not None:
                 serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
                 return Response({'data': serializer.data})
-
+        for num in range(len(food_name)):
             food = FoodConfigParam.objects.create(name=food_name[num], food_type=food_type[num], rate=100, user=request.user)
             food.save()
             serializer = FoodConfigParamSerializer(food)
@@ -56,7 +55,7 @@ class UserFoodConfig(GenericAPIView):
 
     def put(self, request):
         res = []
-        for config in request.data:
+        for config in request.data['data']:
             name = config['name']
             rate = config['rate']
             foodConfigParam = FoodConfigParam.objects.get(user=request.user, name=name)
