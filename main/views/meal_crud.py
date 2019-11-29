@@ -33,21 +33,6 @@ class UserFoodConfig(GenericAPIView):
     queryset = FoodConfigParam.objects.all()
     serializer_class = FoodConfigParamSerializer
 
-    def post(self, request):
-        food_name = ['牛肉', '豚肉', '鶏肉', '鯖', 'イワシ', 'にんじん', 'キャベツ', '玉ねぎ', 'じゃがいも', 'もやし']
-        food_type = ['meat', 'meat', 'meat', 'fish', 'fish', 'vegetable', 'vegetable', 'vegetable', 'vegetable', 'vegetable']
-        foods = []
-        foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
-        if foodConfigParams.first() is not None:
-                serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
-                return Response({'data': serializer.data})
-        for num in range(len(food_name)):
-            food = FoodConfigParam.objects.create(name=food_name[num], food_type=food_type[num], rate=100, user=request.user)
-            food.save()
-            serializer = FoodConfigParamSerializer(food)
-            foods.append(serializer.data)
-        return Response({'data': foods})
-
     def get(self, request):
         foodConfigParams = FoodConfigParam.objects.filter(user=request.user)
         serializer = FoodConfigParamSerializer(foodConfigParams, many=True)
