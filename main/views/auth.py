@@ -21,7 +21,7 @@ class RegisterAuthView(GenericAPIView):
             user = User.objects.get(uuid=serializer.data['uuid'])
             payload = jwt_payload_handler(user)
             return Response({
-            'token': jwt_encode_handler(payload),
+                'token': jwt_encode_handler(payload),
             })
 
         user = User.objects.create_user(uuid=serializer.data['uuid'])
