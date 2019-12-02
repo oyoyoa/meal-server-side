@@ -17,17 +17,9 @@ pipenv run python manage.py runserver
 
 ## 使い方
 
-### ユーザーの作成
+### ユーザーの作成 or ログイン
 
-curl http://localhost:8000/signup/ -d "uuid=yourname"
-
-### ユーザーの認証
-
-curl http://localhost:8000/signin/ -d "uuid=yourname"
-
-### デフォルト食材の追加
-
-curl -X POST -H 'Content-Type:application/json' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
+curl http://localhost:8000/signin/ -d "uuid=uuid"
 
 ### 食材の追加
 
@@ -53,8 +45,4 @@ curl http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
 
 ### 食材の選択状態の一括変更
 
-curl -X PUT -H 'Content-Type:application/json' -d '[{"name":"鶏肉", "rate":0}, {"name":"牛肉", "rate":0}]' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
-
-### 食材の削除
-
-curl -X DELETE http://localhost:8000/randomFood/config/9/ -H 'Authorization: JWT '
+curl -X PUT -H 'Content-Type:application/json' -d '{"data": [{"rate": 30, "name": "牛肉"}, {"rate": 30, "name": "イワシ"}]}' http://localhost:8000/randomFood/user/config/ -H 'Authorization: JWT '
