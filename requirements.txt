@@ -39,7 +39,7 @@ sqlparse==0.3.0
 static3==0.7.0
 stripe==2.35.0
 uritemplate==3.0.0
-urllib3==1.25.3
+urllib3==1.25.8
 virtualenv==16.7.3
 virtualenv-clone==0.5.3
 whitenoise==4.1.2
